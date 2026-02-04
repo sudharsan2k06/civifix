@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CiviFix | Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #1f2933;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: white;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-actions a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-actions a:hover {
+            color: #2563eb;
+        }
+
+        /* LOGIN SECTION */
+        .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 460px;
+            padding: 48px 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            animation: slideUp 0.5s ease-out, float 3s ease-in-out 1s infinite;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .login-card h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #1a202c;
+            font-weight: 700;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .login-card h2 span {
+            color: #2563eb;
+            position: relative;
+            display: inline-block;
+        }
+
+        .login-card h2 span::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            50%, 100% {
+                left: 100%;
+            }
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        /* Staggered fade-in animation */
+        .input-box:nth-child(2) {
+            animation: fadeInUp 0.5s ease-out 0.1s both;
+        }
+
+        .input-box:nth-child(4) {
+            animation: fadeInUp 0.5s ease-out 0.2s both;
+        }
+
+        .login-btn {
+            animation: fadeInUp 0.5s ease-out 0.3s both;
+        }
+
+        .signup-text {
+            animation: fadeInUp 0.5s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: block;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: #374151;
+        }
+
+        .input-box input::placeholder {
+            color: #9ca3af;
+            transition: opacity 0.3s ease;
+        }
+
+        .input-box input:focus::placeholder {
+            opacity: 0.5;
+        }
+
+        .input-box input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Label animation on focus */
+        label {
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: block;
+            color: #374151;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .input-box:focus-within + label,
+        .input-box input:focus ~ label {
+            color: #2563eb;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .login-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .signup-text {
+            text-align: center;
+            font-size: 15px;
+            margin-top: 24px;
+            color: #64748b;
+        }
+
+        .signup-text a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .signup-text a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* OR DIVIDER */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            padding: 24px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #2563eb;
+        }
+
+        .footer-links span {
+            color: #cbd5e1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-actions {
+                gap: 20px;
+            }
+
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            .login-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar">
+        <a href="/" class="logo">
+            🛡️<span>CiviFix</span>
+        </a>
+
+        <div class="nav-actions">
+            <a href="/">Home</a>
+
+        </div>
+    </header>
+
+    <!-- LOGIN SECTION -->
+    <section class="login-section">
+        <div class="login-card">
+            <h2>Login to <span>CiviFix</span></h2>
+            <p class="subtitle">Welcome back! Please enter your account details to continue.</p>
+            
+            <form action="{{url_for('user_dashboard')}}" method="GET">
+                <label>Email Address</label>
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <label>Password</label>
+                <div class="input-box">
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Log In</button>
+                
+                <!-- Sign up Here -->
+                <p class="signup-text">
+                    Don't have an account? <a href="{{url_for('user_signup')}}">Sign up here.</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 CiviFix. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <span>|</span>
+            <a href="#">Terms of Service</a>
+            <span>|</span>
+            <a href="#">Contact</a>
+        </div>
+    </footer>
+</body>
+</html>

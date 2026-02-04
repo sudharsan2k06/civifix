@@ -1,0 +1,490 @@
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+    }
+body {
+  background: #f6f9fc;
+  color: #1f2933;
+}       /*Header Section*/
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffffcc;    /*In here we use blur option*/
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;   /*Justify important*/
+    align-items: center;
+    padding: 18px 60px;
+    border-bottom: 1px solid rgb(224, 225, 231);
+}       /*Font style*/
+.navbar .logo{
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a5ea8;
+}       /*Left How much space*/
+.navbar .logo span{
+    margin-left: 6px;
+}
+nav a{
+    margin: 0 14px;
+    text-decoration: none;
+    color: rgb(84, 84, 122);
+    font-weight: 500;
+    transition: color 0.3s;
+}       /*It specify when cursor is over the Link*/
+nav a:hover{
+    color: #0a5ea8;
+}    /* scroll transistion*/
+html {
+  scroll-behavior: smooth;
+}      /*Cursor Action for Header button*/
+.navbar .nav-actions button{
+    margin-left: 12px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}       /*Authority Login button font*/
+.navbar .nav-actions .btn-outline{
+    background: white;
+    border: 1px solid rgb(166, 170, 173);
+}       /*Authority Login Action  when Cursor*/
+.navbar .nav-actions .btn-outline:hover{
+    background: #f2f9ff;
+}/*Report Issue Button Font*/
+.navbar .nav-actions .btn-primary{
+    background: #0a5ea8;
+    color: white;
+    border: none;
+}/*Report Issue Action  when Cursor*/
+.navbar .nav-actions .btn-primary:hover{
+    background: rgb(11, 53, 121);
+}/*size of pannaling*/
+.big {
+    padding: 14px 28px;
+    font-size: 16px;
+}/* Hero */
+.hero {
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #eef6ff;
+    color: #0b5ed7;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    color: #0b5ed7;
+}
+
+.hero p {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    font-size: 18px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.hero-buttons button {
+    margin: 0 10px;
+    cursor: pointer;
+}
+.hero-buttons .btn-primary{ 
+    background: #0b5ed7; 
+    color: #fff; 
+    padding: 14px 28px; 
+    font-size: 16px; 
+    border-radius: 10px; 
+} 
+.hero-buttons .btn-outline{ 
+    background: #ffffff; 
+    border: 1px solid #cbd5e1;
+     padding: 14px 28px; 
+    font-size: 16px; 
+    border-radius: 10px; 
+} 
+.hero-buttons .btn-primary:hover{ 
+     background: #072997; /* green */ 
+     color: #ffffff;  /* white text */ 
+     border-color: #16a34a; 
+} .hero-buttons .btn-primary { 
+    transition: all 0.3s ease; 
+} .hero-buttons .btn-outline:hover { 
+    background: #16a34a; /* green */ 
+    color: #ffffff; /* white text */ 
+    border-color: #16a34a;
+} 
+.hero-buttons .btn-outline { 
+    transition: all 0.3s ease; 
+}
+/* Benefits */
+.benefits {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    color: #15803d;
+    font-weight: 600;
+}
+/* ===============================
+   HOW IT WORKS SECTION
+================================ */
+.how-it-works {
+    background: #f8fafc;
+    padding: 90px 20px;
+    text-align: center;
+}
+/* SECTION HEADINGS */
+.section-tag {
+    color: #15803d;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.how-it-works h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #0f172a;
+}
+.section-desc {
+    color: #475569;
+    margin: 15px 0 60px;
+    font-size: 16px;
+}
+/* ===============================
+   DIFFERENT COLORS FOR EACH STEP
+================================ */
+
+/* STEP 1 - BLUE */
+.step:nth-child(1) .icon {
+    background: #eaf2ff;
+    color: #2563eb;
+}
+.step:nth-child(1):hover {
+    border-color: #2563eb;
+}
+.step:nth-child(1) .step-no {
+    color: #2563eb;
+}
+
+/* STEP 2 - PURPLE */
+.step:nth-child(2) .icon {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+.step:nth-child(2):hover {
+    border-color: #7c3aed;
+}
+.step:nth-child(2) .step-no {
+    color: #7c3aed;
+}
+
+/* STEP 3 - ORANGE */
+.step:nth-child(3) .icon {
+    background: #fff7ed;
+    color: #ea580c;
+}
+.step:nth-child(3):hover {
+    border-color: #ea580c;
+}
+.step:nth-child(3) .step-no {
+    color: #ea580c;
+}/* STEP 4 - GREEN */
+.step:nth-child(4) .icon {
+    background: #ecfdf5;
+    color: #16a34a;
+}
+.step:nth-child(4):hover {
+    border-color: #16a34a;
+}
+.step:nth-child(4) .step-no {
+    color: #16a34a;
+}
+/* ===============================
+   STEPS GRID
+================================ */
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ===============================
+   STEP CARD
+================================ */
+
+.step {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid transparent;
+    transition: all 0.35s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* HOVER EFFECT */
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 22px 45px rgba(0,0,0,0.08);
+    border-color: #16a34a;
+}
+
+/* ===============================
+   ICON STYLING
+================================ */
+
+.step .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: #ecfdf5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 18px;
+    color: #16a34a;
+    transition: all 0.3s ease;
+}
+
+/* ICON HOVER */
+.step:hover .icon {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+/* ===============================
+   STEP NUMBER
+================================ */
+
+.step-no {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+/* ===============================
+   STEP CONTENT
+================================ */
+.step h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #0f172a;
+}
+
+.step p {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+    .how-it-works h2 {
+        font-size: 28px;
+    }
+
+    .step {
+        padding: 30px;
+    }
+}
+
+
+/* FEATURES SECTION */
+.features {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.features .tag {
+    color: #22c55e;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.features h2 {
+    font-size: 36px;
+    margin: 12px 0;
+}
+
+.features .subtitle {
+    max-width: 640px;
+    margin: 0 auto 60px;
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* GRID */
+.features-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* CARD */
+.feature-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 32px;
+    text-align: left;
+    border: 1px solid #e5edf5;
+    transition: all 0.35s ease;
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    border-color: #2563eb;
+}
+
+/* ICON */
+.icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #eaf2fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .icon {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* TEXT */
+.feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ================= IMPACT ================= */
+.impact {
+  background: #0b5fa5;
+  color: white;
+  text-align: center;
+  padding: 90px 40px;
+}
+
+.impact h4 {
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.impact h2 {
+  font-size: 42px;
+  margin: 15px 0;
+}
+
+.subtitle {
+  opacity: 0.9;
+  margin-bottom: 60px;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+.stat h1 {
+  font-size: 48px;
+}
+
+.stat p {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.stat span {
+  opacity: 0.85;
+  font-size: 14px;
+}
+/* ================= FOOTER ================= */
+.footer {
+  background: white;
+  padding: 70px 60px 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.footer h4 {
+  margin-bottom: 15px;
+}
+
+.footer a {
+  display: block;
+  margin-bottom: 10px;
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #0b5fa5;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+}

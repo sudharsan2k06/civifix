@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Civic Issue - CiviFix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #2d3748;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: #f5f7fa;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 17px;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 650px;
+            margin: 40px auto 80px;
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        /* Input Styles */
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #374151;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234b5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 45px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Location Grid */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* File Upload */
+        .file-upload-wrapper {
+            position: relative;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            cursor: pointer;
+            background: white;
+            font-size: 15px;
+            color: #6b7280;
+        }
+
+        .file-input::-webkit-file-upload-button {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 8px 16px;
+            margin-right: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #374151;
+            transition: all 0.3s ease;
+        }
+
+        .file-input::-webkit-file-upload-button:hover {
+            background: #e5e7eb;
+        }
+
+        /* Image Preview */
+        .image-preview-container {
+            margin-top: 16px;
+            display: none;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* GPS Status Alert */
+        .gps-alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .gps-alert.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .gps-alert.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .gps-alert.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Hidden Fields */
+        .hidden-input {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-links {
+                gap: 24px;
+            }
+
+            .form-container {
+                margin: 30px 20px;
+                padding: 32px 24px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">CiviFix</div>
+        <div class="nav-links">
+            
+            <a href="/">Home</a>
+            <a href="{{ url_for('report_form') }}">Report Issue</a>
+            <a href="{{ url_for('admin') }}">Login</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Report a Civic Issue</h1>
+        <p>Upload an image of the issue, add details, and submit. Authorities will review and resolve it quickly.</p>
+    </section>
+
+    <!-- Report Form -->
+    <div class="form-container">
+        <h2 class="form-title">Submit Your Report</h2>
+
+        <!-- GPS Status Alert -->
+        <div id="gps-status" class="gps-alert info">
+            📍 Capturing your location...
+        </div>
+
+        <form method="POST" action="{{ url_for('report_submit') }}" enctype="multipart/form-data" id="reportForm">
+
+            
+            <!-- Issue Type Dropdown -->
+            <div class="form-group">
+                <label for="issue_type" class="form-label">Issue Type</label>
+                <select class="form-select" id="issue_type" name="issue_type" required>
+                    <option value="">Select issue type</option>
+                    <option value="Pothole">Pothole</option>
+                    <option value="Broken Streetlight">Broken Streetlight</option>
+                    <option value="Garbage Accumulation">Garbage Accumulation</option>
+                    <option value="Damaged Road">Damaged Road</option>
+                    <option value="Water Leakage">Water Leakage</option>
+                    <option value="Broken Sidewalk">Broken Sidewalk</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Issue Title -->
+            <div class="form-group">
+                <label for="issue_title" class="form-label">Issue Title</label>
+                <input 
+                    type="text" 
+                    class="form-input" 
+                    id="issue_title" 
+                    name="issue_title"
+                    placeholder="Short title for the issue"
+                    maxlength="100"
+                >
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea 
+                    class="form-textarea" 
+                    id="description" 
+                    name="description" 
+                    placeholder="Describe the issue in detail"
+                    required
+                ></textarea>
+            </div>
+
+            <!-- Location (City/Street) -->
+            <div class="form-group">
+                <label for="location_text" class="form-label">Location (City / Street)</label>
+                <input 
+                    type="text" 
+                    class="form-input" 
+                    id="location_text" 
+                    name="location_text"
+                    placeholder="Enter your location"
+                >
+            </div>
+
+            <!-- GPS Coordinates -->
+            <div class="form-group">
+                <label class="form-label">GPS Coordinates</label>
+                <div class="location-grid">
+                    <div>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="lat_display" 
+                            placeholder="Latitude"
+                            readonly
+                        >
+                    </div>
+                    <div>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="long_display" 
+                            placeholder="Longitude"
+                            readonly
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden GPS Fields for Form Submission -->
+            <input type="hidden" id="latitude" name="latitude" required>
+            <input type="hidden" id="longitude" name="longitude" required>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label for="image" class="form-label">Upload Image</label>
+                <input 
+                    type="file" 
+                    class="file-input" 
+                    id="image" 
+                    name="image" 
+                    accept="image/*"
+                    required
+                >
+                
+                <!-- Image Preview -->
+                <div class="image-preview-container" id="imagePreviewContainer">
+                    <img id="imagePreview" src="" alt="Preview" class="image-preview">
+                </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    Submit Report
+                </button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // GPS Capture
+        document.addEventListener('DOMContentLoaded', function() {
+            captureGPSLocation();
+            
+            // Setup image preview
+            const imageInput = document.getElementById('image');
+            if (imageInput) {
+                imageInput.addEventListener('change', previewImage);
+            }
+        });
+
+        function captureGPSLocation() {
+            const gpsStatus = document.getElementById('gps-status');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (!navigator.geolocation) {
+                gpsStatus.className = 'gps-alert error';
+                gpsStatus.innerHTML = '❌ GPS not supported by your browser';
+                return;
+            }
+            
+            gpsStatus.className = 'gps-alert info';
+            gpsStatus.innerHTML = '📍 Capturing your location...';
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    
+                    // Store in hidden fields
+                    document.getElementById('latitude').value = latitude;
+                    document.getElementById('longitude').value = longitude;
+                    
+                    // Display in visible fields
+                    document.getElementById('lat_display').value = latitude.toFixed(6);
+                    document.getElementById('long_display').value = longitude.toFixed(6);
+                    
+                    // Update status
+                    gpsStatus.className = 'gps-alert success';
+                    gpsStatus.innerHTML = '✅ Location captured successfully!';
+                    
+                    // Enable submit button
+                    submitBtn.disabled = false;
+                },
+                function(error) {
+                    let errorMessage = '';
+                    
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = '❌ Location permission denied. Please enable location access.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = '❌ Location information unavailable.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = '❌ Location request timed out.';
+                            break;
+                        default:
+                            errorMessage = '❌ Unknown error occurred.';
+                            break;
+                    }
+                    
+                    gpsStatus.className = 'gps-alert error';
+                    gpsStatus.innerHTML = errorMessage;
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const previewImg = document.getElementById('imagePreview');
+            
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        }
+
+        // Form validation
+        document.getElementById('reportForm').addEventListener('submit', function(event) {
+            const latitude = document.getElementById('latitude').value;
+            const longitude = document.getElementById('longitude').value;
+            
+            if (!latitude || !longitude) {
+                event.preventDefault();
+                alert('Please wait for GPS location to be captured before submitting.');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CiviFix | Authority Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes progressFill {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 22px 8%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    animation: slideDown 0.6s ease-out;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text h1 {
+    color: #0a4cc4;
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.header-text p {
+    color: #666;
+    font-size: 14px;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+nav a:hover {
+    color: #fff;
+    background: #0a4cc4;
+    transform: translateY(-2px);
+}
+
+.container {
+    padding: 40px 8%;
+}
+
+.alert {
+    background: #fff3cd;
+    border-left: 4px solid #f0ad4e;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.alert strong {
+    color: #856404;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.kpi {
+    background: #fff;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.9s ease-out both;
+}
+
+.kpi:nth-child(1) { animation-delay: 0.1s; }
+.kpi:nth-child(2) { animation-delay: 0.2s; }
+.kpi:nth-child(3) { animation-delay: 0.3s; }
+
+.kpi:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.kpi h4 {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.kpi p {
+    font-size: 34px;
+    font-weight: 700;
+    animation: countUp 0.6s ease-out both;
+}
+
+.blue { color: #0a4cc4; }
+.green { color: #1aa34a; }
+.orange { color: #f0ad4e; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+    margin-bottom: 45px;
+}
+
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.8s ease-out both;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    margin-bottom: 22px;
+    color: #0a4cc4;
+    font-size: 18px;
+}
+
+.h-item {
+    margin-bottom: 18px;
+    animation: slideInLeft 0.6s ease-out both;
+}
+
+.h-item:nth-child(1) { animation-delay: 0.1s; }
+.h-item:nth-child(2) { animation-delay: 0.2s; }
+.h-item:nth-child(3) { animation-delay: 0.3s; }
+.h-item:nth-child(4) { animation-delay: 0.4s; }
+.h-item:nth-child(5) { animation-delay: 0.5s; }
+
+.h-item label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.h-track {
+    background: #eee;
+    height: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.h-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0a4cc4, #6fa1ff);
+    border-radius: 8px;
+    animation: progressFill 1.5s ease-out both;
+    transition: width 0.3s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+}
+
+th {
+    background: #f0f3ff;
+    color: #0a4cc4;
+    font-weight: 600;
+}
+
+tbody tr {
+    transition: all 0.2s ease;
+    animation: fadeIn 0.6s ease-out both;
+}
+
+tbody tr:hover {
+    background: #f8f9fa !important;
+    transform: scale(1.01);
+}
+
+tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.progress {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.resolved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.coordinates {
+    color: #666;
+    font-size: 12px;
+}
+
+.location-address {
+    color: #333;
+    font-size: 13px;
+    display: block;
+    max-width: 200px;
+    line-height: 1.4;
+}
+
+.loading-location {
+    font-style: italic;
+}
+
+.status-form {
+    display: flex;
+    gap: 8px;
+}
+
+.status-select {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #0a4cc4;
+    box-shadow: 0 0 0 3px rgba(10, 76, 196, 0.1);
+}
+
+.btn-update {
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #1aa34a, #138a3a);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-update:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 163, 74, 0.3);
+}
+
+.btn-update:active {
+    transform: translateY(0);
+}
+
+.img-thumbnail {
+    max-width: 80px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.5);
+    z-index: 10;
+}
+
+footer {
+    background: #0a4cc4;
+    color: #fff;
+    text-align: center;
+    padding: 18px;
+    margin-top: 40px;
+    animation: fadeIn 1s ease-out;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    nav {
+        display: flex;
+        gap: 10px;
+    }
+    
+    nav a {
+        margin-left: 0;
+    }
+    
+    .kpi-grid, .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-form {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="header-text">
+            <h1>🏛️ CiviFix — Authority Dashboard</h1>
+            <p>Civic Issue Management & Monitoring</p>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/export_csv" class="btn">Export CSV</a>
+            <a href="/">Exit Admin Panel</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="alert">
+    <strong>⚠️ Admin Mode:</strong> You are viewing all reported civic issues. Update statuses to keep citizens informed.
+</div>
+
+<!-- KPI Cards -->
+<div class="kpi-grid">
+    <div class="kpi">
+        <h4>Total Issues</h4>
+        <p class="blue">{{ total_count }}</p>
+    </div>
+    <div class="kpi">
+        <h4>In Progress</h4>
+        <p class="orange">{{ in_progress_count }}</p>
+    </div>
+    <div class="kpi">
+        <h4>Resolved</h4>
+        <p class="green">{{ resolved_count }}</p>
+    </div>
+</div>
+
+
+
+<!-- Complaints Management Table -->
+<div class="card" style="margin-bottom:45px">
+    <h3>All Reported Issues - Management</h3>
+    {% if complaints %}
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Issue Type</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Location</th>
+                    <th>Coordinates</th>
+                    <th>Current Status</th>
+                    <th>Update Status</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for complaint in complaints %}
+                <tr>
+                    <td><strong>#{{ complaint.id }}</strong></td>
+                    <td>
+                        <span class="status" style="background: #e6f0fb; color: #0a4cc4;">{{ complaint.issue_type }}</span>
+                    </td>
+                    <td>{{ complaint.description[:50] }}{% if complaint.description|length > 50 %}...{% endif %}</td>
+                    <td>
+                        {% if complaint.image_path %}
+                        <img src="{{ complaint.image_path }}" alt="Issue" class="img-thumbnail">
+                        {% else %}
+                        <span style="color: #999; font-size: 12px;">No image</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="location-address" data-lat="{{ complaint.latitude }}" data-lng="{{ complaint.longitude }}">
+                            <span class="loading-location" style="color: #0a4cc4; font-size: 12px;">📍 Loading...</span>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="coordinates">
+                            <strong>Lat:</strong> {{ "%.4f"|format(complaint.latitude) }}°N<br>
+                            <strong>Long:</strong> {{ "%.4f"|format(complaint.longitude) }}°E
+                        </span>
+                    </td>
+                    <td>
+                        {% if complaint.status == 'Pending' %}
+                        <span class="status pending">Pending</span>
+                        {% elif complaint.status == 'In Progress' %}
+                        <span class="status progress">In Progress</span>
+                        {% elif complaint.status == 'Resolved' %}
+                        <span class="status resolved">Resolved</span>
+                        {% else %}
+                        <span class="status pending">{{ complaint.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="/update_status" method="POST" class="status-form">
+                            <input type="hidden" name="complaint_id" value="{{ complaint.id }}">
+                            <select name="status" class="status-select" required>
+                                <option value="">Select status</option>
+                                <option value="Pending" {% if complaint.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                <option value="In Progress" {% if complaint.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                <option value="Resolved" {% if complaint.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                            </select>
+                            <button type="submit" class="btn-update">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <small style="color: #666;">{{ complaint.created_at.strftime('%d %b %Y') if complaint.created_at is not string else complaint.created_at }}</small>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h5>No complaints to display</h5>
+        <p>There are currently no civic issues reported in the system.</p>
+    </div>
+    {% endif %}
+</div>
+
+</div>
+
+<footer>
+    © 2026 CiviFix | Smart Civic Issue Reporter
+</footer>
+
+<script>
+// Reverse Geocoding - Convert coordinates to human-readable addresses
+document.addEventListener('DOMContentLoaded', function() {
+    const locationElements = document.querySelectorAll('.location-address');
+    
+    locationElements.forEach(async (element) => {
+        const lat = element.getAttribute('data-lat');
+        const lng = element.getAttribute('data-lng');
+        
+        if (lat && lng) {
+            try {
+                // Using OpenStreetMap Nominatim API (free, no API key required)
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
+                    {
+                        headers: {
+                            'User-Agent': 'CiviFix Civic Issue Reporter'
+                        }
+                    }
+                );
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Build human-readable address
+                    let address = '';
+                    if (data.address) {
+                        const parts = [];
+                        
+                        // Add road/street
+                        if (data.address.road) parts.push(data.address.road);
+                        
+                        // Add neighbourhood or suburb
+                        if (data.address.neighbourhood) parts.push(data.address.neighbourhood);
+                        else if (data.address.suburb) parts.push(data.address.suburb);
+                        
+                        // Add city/town
+                        if (data.address.city) parts.push(data.address.city);
+                        else if (data.address.town) parts.push(data.address.town);
+                        else if (data.address.village) parts.push(data.address.village);
+                        
+                        // Add state/province
+                        if (data.address.state) parts.push(data.address.state);
+                        
+                        // Add postcode
+                        if (data.address.postcode) parts.push(data.address.postcode);
+                        
+                        address = parts.join(', ');
+                    }
+                    
+                    // Fallback to display_name if custom address is empty
+                    if (!address && data.display_name) {
+                        // Use first 3 parts of display_name for brevity
+                        const nameParts = data.display_name.split(',').slice(0, 3);
+                        address = nameParts.join(',');
+                    }
+                    
+                    // Update the element
+                    if (address) {
+                        element.innerHTML = `<span style="color: #333;">📍 ${address}</span>`;
+                    } else {
+                        element.innerHTML = '<span style="color: #999; font-size: 12px;">Location unavailable</span>';
+                    }
+                } else {
+                    throw new Error('Geocoding failed');
+                }
+            } catch (error) {
+                console.error('Error fetching address:', error);
+                element.innerHTML = `<span style="color: #666; font-size: 12px;">Lat: ${parseFloat(lat).toFixed(4)}°, Lng: ${parseFloat(lng).toFixed(4)}°</span>`;
+            }
+            
+            // Add small delay between requests to respect API rate limits
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    });
+});
+</script>
+
+</body>
+</html>

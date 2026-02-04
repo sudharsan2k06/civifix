@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Submitted Successfully - CiviFix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #2d3748;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        /* Success Card */
+        .success-card {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 60px 48px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        /* Icon container animation */
+        .icon-container {
+            animation: scaleIn 0.6s ease-out 0.2s both, pulse 0.6s ease-out 2.2s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Checkmark Animation */
+        .checkmark {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawCheck 1.2s ease-in-out 0.8s forwards;
+        }
+
+        @keyframes drawCheck {
+            0% {
+                stroke-dashoffset: 100;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        /* Text Content */
+        .success-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 16px;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .success-submessage {
+            font-size: 16px;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #166534;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #15803d;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            background: #e0f2fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .timeline-icon.active {
+            background: #10b981;
+            color: white;
+        }
+
+        .timeline-content h5 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 24px 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-links {
+                gap: 24px;
+            }
+
+            .success-card {
+                padding: 40px 24px;
+            }
+
+            .success-title {
+                font-size: 26px;
+            }
+
+            .success-message {
+                font-size: 16px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">CiviFix</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="{{ url_for('report_form') }}" >Report Issue</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        
+        <div class="success-card">
+            <!-- Success Icon with Animated Checkmark -->
+            <div class="icon-container">
+                <div class="success-icon">
+                    <svg viewBox="0 0 52 52">
+                        <polyline class="checkmark" points="14,26 22,34 38,18"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <h1 class="success-title">Report Submitted Successfully!</h1>
+            <p class="success-message">
+                Your civic issue report has been submitted to the respective authority.
+            </p>
+            <p class="success-submessage">
+                ✓ Authorities will review and take action soon
+            </p>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <h4>What happens next?</h4>
+                <p>
+                    Your report is now with local authorities. You'll be able to track its status 
+                    and receive updates as they work to resolve the issue. Thank you for making 
+                    your community better!
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <h3 class="timeline-title">Resolution Process</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon active">✓</div>
+                    <div class="timeline-content">
+                        <h5>Report Submitted</h5>
+                        <p>Your report has been successfully received</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔍</div>
+                    <div class="timeline-content">
+                        <h5>Under Review</h5>
+                        <p>Authorities will verify and assess the issue</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔧</div>
+                    <div class="timeline-content">
+                        <h5>In Progress</h5>
+                        <p>Work begins to resolve the reported issue</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">✅</div>
+                    <div class="timeline-content">
+                        <h5>Resolved</h5>
+                        <p>Issue fixed and marked complete</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <a href="/" class="btn btn-primary">
+                    🏠 Back to Home
+                </a>
+                <a href="{{ url_for('user_dashboard') }}" class="btn btn-success">
+                    📊 Check Status
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 CiviFix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Auto-redirect to dashboard after 10 seconds (optional)
+        // Uncomment the following lines if you want auto-redirect
+        /*
+        setTimeout(function() {
+            window.location.href = '/dashboard';
+        }, 10000);
+        */
+
+        // Confetti effect (optional celebratory animation)
+        window.addEventListener('load', function() {
+            // Add any additional animations or effects here
+            console.log('Report submitted successfully!');
+        });
+    </script>
+</body>
+</html>
